@@ -1,0 +1,41 @@
+name: Build and Release Arduino Code for Raspberry Pi Pico
+
+on:
+  push:
+    branches:
+      - main  # mainブランチにプッシュされた時にトリガーされます
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Arduino Code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Arduino CLI
+        uses: arduino/setup-arduino-cli@v1
+        with:
+          version: '0.31.0'
+
+      - name: Install Raspberry Pi Pico board
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install rp2040:rp2040
+
+      - name: Compile the sketch
+        run: |
+          arduino-cli compile --fqbn rp2040:rp2040:rpipico --output-dir ./build ./path_to_your_sketch
+
+      - name: Upload the UF2 file to the release page
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+          release_name: "Release ${{ github.ref_name }}"
+          assets: |
+            ./build/path_to_your_uf2_file.uf2
