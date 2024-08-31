@@ -35,6 +35,6 @@ jobs:
           mkdir -p ./build  # buildフォルダを自動作成
           arduino-cli compile --fqbn arduino:mbed_rp2040:pico --output-dir ./build Test.ino
 
-      - name: List generated files
+      - name: Move UF2 file to build folder
         run: |
-          ls -la ./build  # buildフォルダ内のファイルを表示
+          mv ./build/Test.ino.uf2 ./build/Test.ino.uf2  # UF2ファイルをリポジトリのbuildフォルダに移動
