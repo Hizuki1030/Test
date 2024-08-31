@@ -1,5 +1,8 @@
 name: Build and Release Arduino Code for Raspberry Pi Pico
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
