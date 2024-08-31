@@ -41,4 +41,4 @@ jobs:
           tag: ${{ github.ref_name }}
           name: "Release ${{ github.ref_name }}"
           artifacts: |
-            ./build/path_to_your_uf2_file.uf2
+            ./build/Test.uf2
