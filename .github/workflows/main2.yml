@@ -39,7 +39,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: main
-          name: Release main
+          name: Release main2
           artifacts: ./build/Test.uf2
           makeLatest: legacy
           replacesArtifacts: true
