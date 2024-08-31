@@ -32,15 +32,9 @@ jobs:
 
       - name: Compile the sketch
         run: |
+          mkdir -p ./build  # buildフォルダを自動作成
           arduino-cli compile --fqbn arduino:mbed_rp2040:pico --output-dir ./build Test.ino
 
-      - name: Upload the UF2 file to the release page
-        uses: ncipollo/release-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: main
-          name: Release main2
-          artifacts: ./build/Test.uf2
-          makeLatest: legacy
-          replacesArtifacts: true
-          updateOnlyUnreleased: true  # ここを true に設定
+      - name: Move UF2 file to build folder
+        run: |
+          mv ./build/Test.uf2 ./build/Test.uf2  # UF2ファイルをリポジトリのbuildフォルダに移動
