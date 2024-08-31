@@ -29,7 +29,7 @@ jobs:
 
       - name: Compile the sketch
         run: |
-          arduino-cli compile --fqbn arduino:mbed_rp2040:rpipico --output-dir ./build ./path_to_your_sketch
+          arduino-cli compile --fqbn arduino:mbed_rp2040:rpipico --output-dir ./build Test.ino
 
       - name: Upload the UF2 file to the release page
         uses: ncipollo/release-action@v1
