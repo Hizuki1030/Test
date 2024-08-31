@@ -36,6 +36,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
-          release_name: "Release ${{ github.ref_name }}"
-          assets: |
+          name: "Release ${{ github.ref_name }}"
+          artifacts: |
             ./build/path_to_your_uf2_file.uf2
