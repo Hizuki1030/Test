@@ -38,7 +38,9 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
-          name: "Release ${{ github.ref_name }}"
-          artifacts: |
-            ./build/Test.uf2
+          tag: main
+          name: Release main
+          artifacts: ./build/Test.uf2
+          makeLatest: legacy
+          replacesArtifacts: true
+          updateOnlyUnreleased: true  # ここを true に設定
