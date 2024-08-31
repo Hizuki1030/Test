@@ -35,6 +35,16 @@ jobs:
           mkdir -p ./build  # buildフォルダを自動作成
           arduino-cli compile --fqbn arduino:mbed_rp2040:pico --output-dir ./build Test.ino
 
-      - name: Move UF2 file to build folder
+      - name: List generated files
         run: |
-          mv ./build/Test.ino.uf2 ./build/Test.ino.uf2  # UF2ファイルをリポジトリのbuildフォルダに移動
+          ls -la ./build  # buildフォルダ内のファイルを表示
+
+      - name: Commit and push generated UF2 file
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add ./build/Test.uf2
+          git commit -m "Add compiled UF2 file"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
